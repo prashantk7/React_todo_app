@@ -4,9 +4,22 @@ import propTypes from 'prop-types'
 
 
 function Header(props) {
+    const style = {
+
+        position: "sticky",
+        width: "100%",
+        top: "0",
+        zIndex: "100"
+    }
+
+    function ifCheckBox() {
+        // props.setsearchBar(!props.searchBar);
+        console.log("sdfarf")
+    }
+
     return (
-        <header>
-            <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+        <header className="h-fixed" style={style}>
+            <nav className="navbar navbar-expand-md navbar-dark bg-dark">
                 <div className="container-fluid">
                     <a className="navbar-brand" href="#">
                         {props.title}
@@ -24,27 +37,25 @@ function Header(props) {
                                 </a>
                             </li>
                         </ul>
-                        {/* <input type="checkbox" id="ab" defaultChecked onChange={() => this.checked ?
-                            (props.searchBar === false,
-                                console.console.log(true)) :
-                            (console.log(false),
-                                props.searchBar === true)} /> */}
+                        <input type="checkbox" defaultChecked onChange={() => ifCheckBox} />
 
-                        {props.searchBar ? <form className="d-flex">
-                            <input
-                                className="form-control me-2"
-                                type="search"
-                                placeholder="Search"
-                                aria-label="Search"
-                            />
-                            <button className="btn btn-outline-success" type="submit">
-                                Search
-                            </button>  </form> : ""}
+                        {
+                            props.searchBar ?
+                                <form className="d-flex">
+                                    <input
+                                        className="form-control me-2"
+                                        type="search"
+                                        placeholder="Search"
+                                        aria-label="Search"
+                                    />
+                                    <button className="btn border-none shadow-none btn-outline-success" type="button" >
+                                        Search
+                                    </button>  </form> : ""
+                        }
                     </div>
                 </div>
             </nav>
-            <h1 className="text-center bg-dark text-white">This is Header</h1>
-        </header>
+        </header >
     );
 }
 Header.propTypes = {

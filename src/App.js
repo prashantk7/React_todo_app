@@ -1,68 +1,50 @@
-import "./App.css";
+import React, { useState, useEffect } from "react";
 import Header from "./components/Header";
-import Footer from "./components/Footer";
 import Main from "./components/Main";
-import React, { useState } from "react";
+import Footer from "./components/Footer";
+import "./App.css";
 
 function App() {
-  const [todolist, setTodos] = useState([
-    {
-      sNO: "1",
-      todo: "task 1",
-      des: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Officiis quaerat corporis animi, voluptatibus.",
-    },
-    {
-      sNO: "2",
-      todo: "task 2",
-      des: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Officiis quaerat corporis animi, voluptatibus.",
-    },
-    {
-      sNO: "3",
-      todo: "task 3",
-      des: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Officiis quaerat corporis animi, voluptatibus.",
-    },
-    {
-      sNO: "4",
-      todo: "task 4",
-      des: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Officiis quaerat corporis animi, voluptatibus.",
-    },
-    {
-      sNO: "5",
-      todo: "task 5",
-      des: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Officiis quaerat corporis animi, voluptatibus.",
-    },
-    ,
-    {
-      sNO: "6",
-      todo: "task 6",
-      des: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Officiis quaerat corporis animi, voluptatibus.",
-    },
-    ,
-    {
-      sNO: "7",
-      todo: "task 7",
-      des: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Officiis quaerat corporis animi, voluptatibus.",
-    },
-    ,
-    {
-      sNO: "8",
-      todo: "task 8",
-      des: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Officiis quaerat corporis animi, voluptatibus.",
-    },
-  ]);
+  const [searchBar, setsearchBar] = useState(true);
 
-  const onDelete = (todo) => {
+
+  let todoArray;
+  if (localStorage.getItem("todolist") === null) {
+    todoArray = [];
+  }
+  else {
+    todoArray = JSON.parse(localStorage.getItem("todolist"))
+  }
+
+  const [todolist, setTodos] = useState(todoArray);
+
+  useEffect(() => {
+    localStorage.setItem("todolist", JSON.stringify(todolist));
+
+  }, [todolist])
+
+  function onDelete(todo) {
     setTodos(
       todolist.filter((e) => {
         return e !== todo;
       })
     );
-  };
+
+  }
+
+  function addTodo(todoValue, desValue) {
+    let newTodo = {
+      todo: todoValue,
+      des: desValue
+    }
+    setTodos([...todolist, newTodo])
+
+  }
 
   return (
     <div className="app">
-      <Header title="Todo App" searchBar={true} />
-      <Main onDelete={onDelete} todolist={todolist} />
+      <Header title="Todo App" searchBar={searchBar} setsearchBar={setsearchBar} />
+      <Main onDelete={onDelete} todolist={todolist} addTodo={addTodo} />
       <Footer />
     </div>
   );
