@@ -1,3 +1,4 @@
+import React from 'react'
 function Footer() {
     return (
         <footer className="bg-dark text-white bottom-0" >

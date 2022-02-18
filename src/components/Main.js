@@ -1,3 +1,4 @@
+import React from 'react'
 import Todos from "./Todos"
 import AddTodo from './AddTodo'
 function Main(props) {
