@@ -1,9 +1,8 @@
 import Todos from "./Todos"
 import AddTodo from './AddTodo'
-// import "./Main.css"
 function Main(props) {
     const style = {
-        minHeight: "calc(100vh - 30vh)"
+        minHeight: "calc(100vh - 24.7vh)"
     }
     return (
         <section className="main" style={style}  >
